@@ -1,0 +1,16 @@
+#eureka注册中心对外暴露的端口，提供web界面，查看所有注册的微服务
+server:
+    port: 8761
+#设置注册中心当前主机的主机名
+eureka:
+    instance:
+        hostname: eurekaserver
+        appname: eurekaserver
+    #当前的注册中心是否应该注册在当前注册中心
+    client:
+        #要注册就把这个改为true，将自己作为一个微服务注册到注册中心，必须配一个上面那个appname:名字，默认是false不注册
+        registerWithEureka: true
+        fetchRegistry: false
+        #该地址是将来所有微服务用于注册到注册中心的地址【重要】
+        serviceUrl:
+            defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
